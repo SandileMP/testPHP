@@ -1,0 +1,59 @@
+version: '2.2'
+volumes:
+  apache_logs:
+    driver: local
+  mysql_data:
+    driver: local
+services:
+  php:
+    build: ./php
+    volumes:
+     - ../public_html:/app/public_html
+     - apache_logs:/var/log/apache2/
+     - ../uploads/login:/app/public_html/login/application/controllers/interview/uploads
+     - ../uploads/logins:/app/public_html/logins/application/controllers/interview/uploads
+     - ../test_uploads/logins:/app/public_html/logins/application/controllers/interview/test_uploads
+    ports:
+     - 9090:80
+    environment:
+     - DB_HOST=mysql
+     - DB_USER=root
+     - DB_PASSWORD=root
+     - DB_NAME=einteajaxm_db2
+     - BASE_URL=http://127.0.0.1:9090/logins
+     - ASSET_VERSION=20200305
+    restart: unless-stopped
+  ffmpeg:
+    image: prolix:ffmpeg
+    volumes:
+      - ../test_uploads/logins:/app
+    restart: unless-stopped
+    command: ["/etc/video.sh"]
+    entrypoint: ["/bin/bash"]
+  cron:
+    image: prolix:ffmpeg
+    volumes:
+      - ../uploads/logins:/app
+      - ./ffmpeg/files:/test
+    restart: unless-stopped
+    command: ["/docker-entrypoint.sh"]
+    entrypoint: ["/bin/bash"]
+
+  mysql:
+    image: mysql:5.6
+    volumes: 
+      - mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - mysql:db
+    ports:
+      - 9091:80
+#  certbot:
+#    image: certbot/certbot
+#    volumes:
+#     - /etc/letsencrypt:/etc/letsencrypt
+#     - /var/lib/letsencrypt:/var/lib/letsencrypt

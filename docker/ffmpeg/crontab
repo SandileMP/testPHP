@@ -1,0 +1,1 @@
+* * * * * /bin/bash /etc/video1.sh > /proc/$(cat /var/run/crond.pid)/fd/1 2>&1

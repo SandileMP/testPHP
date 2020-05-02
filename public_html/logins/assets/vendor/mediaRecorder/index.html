@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=es6%2Ces5%2Ces2016%2Ces2015%2Cdefault"></script>
+    <script src="./OpusMediaRecorder.umd.js"></script>
+    <script src="./encoderWorker.umd.js"></script>
+</head>
+
+<body>
+--> TEST
+    <div id="your-player-container">
+        <video autoplay muted playsinline>
+
+        </video>
+    </div>
+    <div id="button-container">
+        <button id="init">init</button>
+        <button id="start">start</button>
+        <button id="stop">stop</button>
+        <button id="download">download</button>
+        <button id="preview">preview</button>
+    </div>
+    <div id="console">
+
+    </div>
+    <script>
+         function test2() {
+                var video = document.querySelector('video');
+                var width = 320;
+                var height = 480;
+                video.style.height = height;
+                video.style.width = width;
+                window.MediaRecorder = OpusMediaRecorder;
+                var workerOptions = {
+                    OggOpusEncoderWasmPath: 'https://96278261.ngrok.io/demo/OggOpusEncoder.wasm',
+                    WebMOpusEncoderWasmPath: 'https://96278261.ngrok.io/demo/WebMOpusEncoder.wasm'
+                };
+
+                var chunks = [];
+                var mediaRecorder = null;
+                navigator.mediaDevices
+                    .getUserMedia({ audio: true, video: true })
+                    .then(function (stream) {
+                        video.srcObject = stream.clone();
+                        mediaRecorder = new MediaRecorder(
+                            stream,
+                            { mimeType: "video/webm", width: width, height: height, bitsPerSecond: 1200 },
+                            workerOptions
+                        );
+                        $startButton = document.getElementById("start");
+                        $stopButton = document.getElementById("stop");
+
+                        $startButton.onclick = function () {
+                            mediaRecorder.start();
+                            console.log(mediaRecorder.state);
+                            console.log("recorder started");
+                            // record.style.background = "red";
+                            // record.style.color = "black";
+                        };
+
+                        $stopButton.onclick = function () {
+                            mediaRecorder.stop();
+                            console.log(mediaRecorder.state);
+                            console.log("recorder stopped");
+                            // record.style.background = "";
+                            // record.style.color = "";
+                        };
+
+                        mediaRecorder.onstop = function (e) {
+                            var blob = new Blob(chunks, { 'type': 'video/webm' });
+                            chunks = [];
+                            var videoURL = URL.createObjectURL(blob);
+                            var a = document.createElement('a');
+                            a.download = "video.webm";
+                            a.href = videoURL;
+                            a.click();
+                        };
+
+                        mediaRecorder.ondataavailable = function (e) {
+                            chunks.push(e.data);
+                        }
+                    }).catch(function (err) {
+                        console.log('The following error occurred: ' + err);
+                    });
+            }
+        $initButton = document.getElementById("init");
+        $initButton.onclick = test2;
+    </script>
+</body>
+
+</html>

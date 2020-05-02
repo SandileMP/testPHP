@@ -1,0 +1,181 @@
+.e-interview-page .navbar-btn .menu-text{
+  font-size: 18px;
+  position: relative;
+  top: -3px;
+}
+
+.e-interview-access-page .navbar-btn .menu-text{
+  font-size: 18px;
+  position: relative;
+  top: -5px;
+}
+
+.navbar-btn-button
+{
+  font-size: 24px;
+  padding: 4px 8px;
+  line-height: .7;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+.next-step
+{
+  font-size: 20px;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 35px;
+  width: 100%;
+}
+.next-step a:before{
+
+}
+.next-step a{
+  border-bottom: 1px solid;
+}
+
+
+
+@media screen and (max-width: 767px)
+{
+  .e-interview-access-page .brand{
+    display: block;
+  }
+
+  #wrapper .logo {
+    height: 50px!important;
+    width: 100px!important;
+  }
+
+  #wrapper .navbar-btn {
+    margin-left: 0;
+  }
+
+  .e-interview-access-page #navbar-menu
+  {
+    display: inline;
+    width: min-content;
+    float: right;
+    margin-top: 11px;
+  }
+
+  .e-interview-access-page .navbar-nav > li > a span:not(.badge)
+  {
+    display: block;
+    display: inline-block;
+  }
+
+  .e-interview-access-page .navbar-nav > li.dropdown
+  {
+    min-width: 150px;
+  }
+
+  .interview-welcome-page ol.text-justify
+  {
+    margin: 20px 0px !important;
+    padding: 0px;
+  }
+
+  .interview-welcome-page label.fancy-checkbox
+  {
+    margin-left: 0px !important;
+    margin-bottom: 20px;
+  }
+
+}
+
+.seekbartext span {
+  position: absolute;
+  background: #008cff;
+  height: 3px;
+  width: 10PX;
+  top: 14px;
+  z-index: 2;
+}
+.modal_question_view
+{
+  margin-top: 10px;
+  min-height: 35px;
+  padding-top: 5px;
+  width: 100%;
+  font-size: 16px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.modal_question_btn_list{
+  margin-top: 10px;
+  width: 100%;
+}
+.modal_question_btn_list .question{
+  margin-bottom: 10px;
+}
+
+.seekbartext .seekbarpoint:last-child{display: none;}
+
+@media (max-width: 425px)
+{
+  #wrapper .brand {left: 0px;}
+  .e-interview-access-page #navbar-menu{display: none;}
+}
+
+.upload-progress-data{
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	left: 0;
+	background: #d2d2d8f0;
+	padding-top: 35%;
+}
+#interviewVideo{
+
+}
+#interviewVideo:after{
+
+}
+
+.interview_video{
+	background: #82bed059;
+}
+.interview_video:after{
+	content: "";
+}
+
+.answer-time .hide-next-question-div .btn-info{
+  display: none;
+}
+
+.custom-video-js {
+  width: 100%;
+  height: 350px;
+}
+.notcompleted-color{
+  background-color: #ff0000 !important;
+  color: #ffffff !important;
+}
+.completed-color{
+  background-color: #5cb85c !important;
+  color: #ffffff !important;
+}
+.disabled-color{
+  background-color: #ff0000 !important;
+  color: #ffffff !important;
+}
+.rejected-color{
+  background-color: #ff0000 !important;
+  color: #ffffff !important;
+}
+.underconversion-color{
+  background-color: #fff700 !important;
+  color: #000000 !important;
+}
+.conversioninprocess-color{
+  background-color: #fff700 !important;
+  color: #000000 !important;
+}
+.conversionfail-color{
+  background-color: #ff0000 !important;
+  color: #ffffff !important;
+}

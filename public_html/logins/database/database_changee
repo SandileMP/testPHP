@@ -1,0 +1,5 @@
+
+
+
+ALTER TABLE `tbl_interview` ADD `question_data` TEXT NULL DEFAULT NULL AFTER `status`;
+
